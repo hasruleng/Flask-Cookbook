@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <!-- Insert navigation bar HTML below -->
     <div>
-  <a href="/">Recipes</a>
-   |
-  <a href="/about">About</a>
-</div>
+      <!-- Replace URL string with url_for -->
+      <a href="{{ url_for('index') }}">Recipes</a>
+      |
+      <!-- Replace URL string with url_for -->
+      <a href="{{ url_for('about') }}">About</a>
+    </div>
     {% block content %}
     {% endblock %}
   </body>
