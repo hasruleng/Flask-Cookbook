@@ -3,8 +3,20 @@ from helper import recipes, descriptions, ingredients, instructions, add_ingredi
 
 app = Flask(__name__)
 
-@app.route('/')
+
+@app.route("/", methods=["GET", "POST"])
 def index():
+  new_id = len(recipes) + 1
+  if len(request.form) > 0:
+    #### Add the recipe name to recipes[new_id]
+    recipes[new_id] = request.form["recipe"]
+        #### Add the recipe description to descriptions[new_id]
+    descriptions[new_id] = request.form["description"]
+    #### Add the values to new_ingredients and new_instructions
+    new_ingredients = request.form["ingredients"]
+    new_instructions = request.form["instructions"]
+    add_ingredients(new_id, new_ingredients)
+    add_instructions(new_id, new_instructions)
   return render_template("index.html", template_recipes=recipes)
 
 @app.route("/recipe/<int:id>")
