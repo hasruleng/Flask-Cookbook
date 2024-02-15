@@ -2,12 +2,13 @@ from flask import Flask, render_template, request
 from helper import recipes, descriptions, ingredients, instructions, add_ingredients, add_instructions, comments
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "mysecret"
 
 class CommentForm(FlaskForm):
-  comment =  StringField("Comment")
+  comment =  StringField("Comment", validators=[DataRequired()])   #### Add a validator argument in the StringField
   submit = SubmitField("Add Comment")
 
 @app.route("/", methods=["GET", "POST"])
