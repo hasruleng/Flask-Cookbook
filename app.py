@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from helper import recipes, types, descriptions, ingredients, instructions, add_ingredients, add_instructions, comments
 from forms import RecipeForm, CommentForm
 
@@ -19,6 +19,10 @@ def index():
     add_ingredients(new_id, new_ingredients)
     add_instructions(new_id, new_instructions)
     comments[new_id] = []
+    #### Redirect to recipe route here
+    return redirect(url_for("recipe", id=new_id, _external=True, _scheme='http'))
+
+
   return render_template("index.html", template_recipes=recipes, template_form=recipe_form)
 
 @app.route("/recipe/<int:id>", methods=["GET", "POST"])
